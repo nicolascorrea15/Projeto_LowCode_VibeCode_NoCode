@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>João da Silva Oliveira — Portfólio</title>
+<meta name="description" content="Portfólio pessoal de João da Silva Oliveira, estudante de Ciência da Computação." />
+<style>
+  :root{
+    --bg:#ffffff; --fg:#111418; --muted:#6b7280; --muted-bg:#f4f5f7;
+    --border:#e5e7eb; --primary:#0b1e4a; --primary-fg:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+    font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1024px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);z-index:10}
+  .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:600;color:var(--primary);letter-spacing:-.01em}
+  nav.tabs{display:flex;gap:4px;font-size:14px}
+  nav.tabs a{padding:6px 12px;border-radius:6px;color:var(--muted);transition:.15s}
+  nav.tabs a:hover{color:var(--fg);background:var(--muted-bg)}
+  nav.tabs a.active{background:var(--primary);color:var(--primary-fg)}
+  main{padding:56px 0}
+  .page{display:none}
+  .page.active{display:block}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+  h1{font-size:clamp(36px,6vw,56px);line-height:1.05;margin:0 0 20px;letter-spacing:-.02em;font-weight:600}
+  h2.page-title{font-size:36px;letter-spacing:-.02em;font-weight:600;margin:0 0 12px}
+  .lead{color:var(--muted);max-width:640px;font-size:18px;line-height:1.65}
+  .grid2{display:grid;grid-template-columns:1fr;gap:24px;margin-top:40px}
+  @media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
+  .card{border:1px solid var(--border);border-radius:8px;padding:24px;transition:.15s}
+  .card:hover{border-color:var(--primary)}
+  .card h3{margin:0 0 8px;font-size:14px;color:var(--primary);font-weight:600}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .btns{display:flex;gap:12px;margin-top:32px;font-size:14px;flex-wrap:wrap}
+  .btn{padding:10px 18px;border-radius:6px;cursor:pointer;display:inline-block}
+  .btn-primary{background:var(--primary);color:var(--primary-fg)}
+  .btn-primary:hover{opacity:.9}
+  .btn-outline{border:1px solid var(--border)}
+  .btn-outline:hover{background:var(--muted-bg)}
+  .stack{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+  article.proj{border:1px solid var(--border);border-radius:8px;padding:24px;transition:.15s}
+  article.proj:hover{border-color:var(--primary)}
+  .proj-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:8px}
+  .proj-head h3{margin:0;font-size:18px;font-weight:600}
+  .proj-head .when{font-size:12px;color:var(--muted)}
+  .proj .course{color:var(--primary);font-size:14px;font-weight:500;margin:0 0 12px}
+  .proj .desc{color:var(--muted);font-size:14px;margin:0 0 16px}
+  .tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-size:12px;padding:4px 8px;border-radius:4px;background:var(--muted-bg);color:var(--muted)}
+  .section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+  .pgrid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:640px){.pgrid{grid-template-columns:1fr 1fr}}
+  .pcard h3{margin:0;font-size:18px;font-weight:600}
+  .pcard .role{font-size:12px;color:var(--primary)}
+  .pcard .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .contact{display:flex;flex-direction:column;gap:12px;margin-top:32px;max-width:520px}
+  .contact a{display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid var(--border);
+    border-radius:8px;transition:.15s}
+  .contact a:hover{border-color:var(--primary);background:var(--muted-bg)}
+  .contact .ico{width:32px;height:32px;display:grid;place-items:center;background:var(--primary);
+    color:var(--primary-fg);border-radius:6px;font-weight:700;font-size:14px}
+  .contact .lbl{font-weight:500}
+  .contact .val{font-size:13px;color:var(--muted)}
+  footer{border-top:1px solid var(--border);margin-top:40px}
+  footer .wrap{padding:24px;font-size:12px;color:var(--muted)}
+  section.block{margin-bottom:48px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="#/" class="brand">Portfólio</a>
+    <nav class="tabs" id="tabs">
+      <a href="#/" data-route="/">Início</a>
+      <a href="#/academicos" data-route="/academicos">Acadêmico</a>
+      <a href="#/pessoais" data-route="/pessoais">Pessoal</a>
+      <a href="#/contato" data-route="/contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Início -->
+  <section class="page" data-page="/">
+    <p class="eyebrow">Estudante · Ciência da Computação</p>
+    <h1>João da Silva Oliveira</h1>
+    <p class="lead">Sou estudante universitário no quinto semestre de Ciência da Computação,
+      com foco em desenvolvimento de software, sistemas distribuídos e inteligência artificial
+      aplicada. Construo projetos para aprender em profundidade — da especificação à entrega.</p>
+    <div class="grid2">
+      <div class="card"><h3>TRABALHO ATUAL</h3>
+        <p>Pesquisa de iniciação científica em otimização de algoritmos de grafos e desenvolvimento web full-stack com TypeScript e Python.</p></div>
+      <div class="card"><h3>AMBIÇÕES</h3>
+        <p>Cursar mestrado na área de sistemas inteligentes e contribuir com projetos open source que tenham impacto real em pesquisa acadêmica e na indústria.</p></div>
+    </div>
+    <div class="btns">
+      <a href="#/academicos" class="btn btn-primary">Ver projetos</a>
+      <a href="#/contato" class="btn btn-outline">Entrar em contato</a>
+    </div>
+  </section>
+
+  <!-- Acadêmicos -->
+  <section class="page" data-page="/academicos">
+    <p class="eyebrow">Universidade</p>
+    <h2 class="page-title">Projetos acadêmicos</h2>
+    <p class="lead">Trabalhos desenvolvidos em disciplinas e na pesquisa de iniciação científica.</p>
+    <div class="stack" id="acad"></div>
+  </section>
+
+  <!-- Pessoais -->
+  <section class="page" data-page="/pessoais">
+    <p class="eyebrow">Fora da sala de aula</p>
+    <h2 class="page-title">Projetos pessoais & colaborações</h2>
+    <section class="block" style="margin-top:40px">
+      <p class="section-label">Projetos pessoais</p>
+      <div class="pgrid" id="pers"></div>
+    </section>
+    <section class="block">
+      <p class="section-label">Colaborações</p>
+      <div class="pgrid" id="colab"></div>
+    </section>
+  </section>
+
+  <!-- Contato -->
+  <section class="page" data-page="/contato">
+    <p class="eyebrow">Vamos conversar</p>
+    <h2 class="page-title">Contato</h2>
+    <p class="lead">Estou aberto a colaborações em projetos acadêmicos, oportunidades de estágio e discussões sobre pesquisa.</p>
+    <div class="contact">
+      <a href="https://github.com/joaosilva" target="_blank" rel="noopener">
+        <span class="ico">GH</span>
+        <span><div class="lbl">GitHub</div><div class="val">github.com/joaosilva</div></span>
+      </a>
+      <a href="https://linkedin.com/in/joaosilva" target="_blank" rel="noopener">
+        <span class="ico">in</span>
+        <span><div class="lbl">LinkedIn</div><div class="val">linkedin.com/in/joaosilva</div></span>
+      </a>
+      <a href="mailto:joao.silva@email.com">
+        <span class="ico">@</span>
+        <span><div class="lbl">Email</div><div class="val">joao.silva@email.com</div></span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© <span id="yr"></span> — Portfólio acadêmico</div></footer>
+
+<script>
+const academicos = [
+  {title:"Compilador para linguagem didática",course:"Compiladores",when:"2025/1",
+   desc:"Implementação de analisador léxico, sintático e semântico para uma linguagem imperativa simples, com geração de código intermediário em três endereços.",
+   tech:["C++","Flex","Bison"]},
+  {title:"Simulador de escalonamento de processos",course:"Sistemas Operacionais",when:"2024/2",
+   desc:"Simulador comparando algoritmos FCFS, SJF, Round Robin e prioridade, com métricas de throughput, espera média e tempo de resposta.",
+   tech:["Python","Matplotlib"]},
+  {title:"API REST para biblioteca universitária",course:"Engenharia de Software",when:"2024/2",
+   desc:"Sistema completo de empréstimos com autenticação JWT, testes automatizados e documentação OpenAPI.",
+   tech:["Node.js","PostgreSQL","Docker"]},
+  {title:"Análise de algoritmos em grafos densos",course:"Iniciação Científica",when:"2025/1",
+   desc:"Estudo comparativo entre Dijkstra, Bellman-Ford e A* em grafos sintéticos com diferentes densidades, com publicação em evento interno.",
+   tech:["Python","NetworkX","LaTeX"]},
+];
+const pessoais = [
+  {title:"tinyql",role:"Autor",
+   desc:"Mini-banco de dados relacional escrito do zero em Rust, com parser SQL próprio e armazenamento em arquivo. Projeto de estudo sobre internals de SGBDs.",
+   tech:["Rust"]},
+  {title:"agenda-cli",role:"Autor",
+   desc:"Aplicativo de linha de comando para gerenciar tarefas e prazos da faculdade, com sincronização via arquivo JSON e atalhos vim-like.",
+   tech:["Go","Bubble Tea"]},
+];
+const colaboracoes = [
+  {title:"openviz",role:"Contribuidor",
+   desc:"Biblioteca open source de visualização de dados. Contribuí com correções no módulo de eixos logarítmicos e documentação de exemplos.",
+   tech:["TypeScript","D3"]},
+  {title:"Hackathon UFXX 2024",role:"Front-end",
+   desc:"Equipe de quatro pessoas; protótipo de sistema de carona universitária com geolocalização. Segundo lugar geral.",
+   tech:["React Native","Firebase"]},
+];
+
+const tags = a => a.map(t=>`<span class="tag">${t}</span>`).join("");
+document.getElementById("acad").innerHTML = academicos.map(p=>`
+  <article class="proj">
+    <div class="proj-head"><h3>${p.title}</h3><span class="when">${p.when}</span></div>
+    <p class="course">${p.course}</p>
+    <p class="desc">${p.desc}</p>
+    <div class="tags">${tags(p.tech)}</div>
+  </article>`).join("");
+const pcard = p=>`<article class="proj pcard">
+  <div class="row"><h3>${p.title}</h3><span class="role">${p.role}</span></div>
+  <p class="desc">${p.desc}</p><div class="tags">${tags(p.tech)}</div></article>`;
+document.getElementById("pers").innerHTML = pessoais.map(pcard).join("");
+document.getElementById("colab").innerHTML = colaboracoes.map(pcard).join("");
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+function route(){
+  const h = location.hash.replace(/^#/,"") || "/";
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.dataset.page===h));
+  document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("active",a.dataset.route===h));
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
