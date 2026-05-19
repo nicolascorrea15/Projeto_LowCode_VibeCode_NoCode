@@ -2,210 +2,365 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>João da Silva Oliveira — Portfólio</title>
-<meta name="description" content="Portfólio pessoal de João da Silva Oliveira, estudante de Ciência da Computação." />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portfólio</title>
 <style>
   :root{
-    --bg:#ffffff; --fg:#111418; --muted:#6b7280; --muted-bg:#f4f5f7;
-    --border:#e5e7eb; --primary:#0b1e4a; --primary-fg:#ffffff;
+    --bg:#ffffff; --fg:#0a0a0a; --muted:#5b6473; --border:#e6e8ec;
+    --primary:#0b1f4d; --primary-fg:#ffffff;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
-    font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;
-    -webkit-font-smoothing:antialiased;line-height:1.5}
+  html,body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1024px;margin:0 auto;padding:0 24px}
-  header{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
+  header.site{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
     border-bottom:1px solid var(--border);z-index:10}
-  .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
-  .brand{font-weight:600;color:var(--primary);letter-spacing:-.01em}
-  nav.tabs{display:flex;gap:4px;font-size:14px}
-  nav.tabs a{padding:6px 12px;border-radius:6px;color:var(--muted);transition:.15s}
-  nav.tabs a:hover{color:var(--fg);background:var(--muted-bg)}
-  nav.tabs a.active{background:var(--primary);color:var(--primary-fg)}
+  header .row{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{font-weight:600;color:var(--primary);letter-spacing:-.01em;cursor:pointer}
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;font-size:14px;align-items:center}
+  nav.tabs button{background:none;border:0;cursor:pointer;color:var(--muted);
+    padding:6px 12px;border-radius:8px;font:inherit;font-size:14px}
+  nav.tabs button:hover{color:var(--fg);background:#f1f3f6}
+  nav.tabs button.active{background:var(--primary);color:var(--primary-fg)}
+  .edit-btn{font-size:12px;padding:5px 10px;border:1px solid var(--border);border-radius:6px;
+    background:var(--bg);cursor:pointer;color:var(--muted)}
+  .edit-btn:hover{color:var(--fg)}
   main{padding:56px 0}
-  .page{display:none}
-  .page.active{display:block}
-  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-  h1{font-size:clamp(36px,6vw,56px);line-height:1.05;margin:0 0 20px;letter-spacing:-.02em;font-weight:600}
-  h2.page-title{font-size:36px;letter-spacing:-.02em;font-weight:600;margin:0 0 12px}
-  .lead{color:var(--muted);max-width:640px;font-size:18px;line-height:1.65}
-  .grid2{display:grid;grid-template-columns:1fr;gap:24px;margin-top:40px}
+  section{display:none}
+  section.active{display:block}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+  h1{font-size:clamp(36px,5vw,56px);line-height:1.05;letter-spacing:-.02em;margin:0 0 20px}
+  h2.page{font-size:36px;letter-spacing:-.02em;margin:0 0 12px}
+  p.lead{font-size:18px;color:var(--muted);line-height:1.6;max-width:640px;margin:0 0 24px}
+  .grid2{display:grid;grid-template-columns:1fr;gap:20px;margin-top:24px}
   @media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
-  .card{border:1px solid var(--border);border-radius:8px;padding:24px;transition:.15s}
-  .card:hover{border-color:var(--primary)}
-  .card h3{margin:0 0 8px;font-size:14px;color:var(--primary);font-weight:600}
-  .card p{margin:0;color:var(--muted);font-size:14px}
-  .btns{display:flex;gap:12px;margin-top:32px;font-size:14px;flex-wrap:wrap}
-  .btn{padding:10px 18px;border-radius:6px;cursor:pointer;display:inline-block}
-  .btn-primary{background:var(--primary);color:var(--primary-fg)}
-  .btn-primary:hover{opacity:.9}
-  .btn-outline{border:1px solid var(--border)}
-  .btn-outline:hover{background:var(--muted-bg)}
-  .stack{display:flex;flex-direction:column;gap:16px;margin-top:32px}
-  article.proj{border:1px solid var(--border);border-radius:8px;padding:24px;transition:.15s}
-  article.proj:hover{border-color:var(--primary)}
-  .proj-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:8px}
-  .proj-head h3{margin:0;font-size:18px;font-weight:600}
-  .proj-head .when{font-size:12px;color:var(--muted)}
-  .proj .course{color:var(--primary);font-size:14px;font-weight:500;margin:0 0 12px}
-  .proj .desc{color:var(--muted);font-size:14px;margin:0 0 16px}
-  .tags{display:flex;gap:8px;flex-wrap:wrap}
-  .tag{font-size:12px;padding:4px 8px;border-radius:4px;background:var(--muted-bg);color:var(--muted)}
-  .section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
-  .pgrid{display:grid;grid-template-columns:1fr;gap:16px}
-  @media(min-width:640px){.pgrid{grid-template-columns:1fr 1fr}}
-  .pcard h3{margin:0;font-size:18px;font-weight:600}
-  .pcard .role{font-size:12px;color:var(--primary)}
-  .pcard .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-  .contact{display:flex;flex-direction:column;gap:12px;margin-top:32px;max-width:520px}
-  .contact a{display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid var(--border);
-    border-radius:8px;transition:.15s}
-  .contact a:hover{border-color:var(--primary);background:var(--muted-bg)}
-  .contact .ico{width:32px;height:32px;display:grid;place-items:center;background:var(--primary);
-    color:var(--primary-fg);border-radius:6px;font-weight:700;font-size:14px}
-  .contact .lbl{font-weight:500}
-  .contact .val{font-size:13px;color:var(--muted)}
-  footer{border-top:1px solid var(--border);margin-top:40px}
-  footer .wrap{padding:24px;font-size:12px;color:var(--muted)}
-  section.block{margin-bottom:48px}
+  .card{border:1px solid var(--border);border-radius:10px;padding:24px}
+  .card h3{margin:0 0 8px;color:var(--primary);font-size:14px;font-weight:600}
+  .card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+  .btn{padding:10px 18px;border-radius:8px;font-size:14px;border:1px solid var(--border);cursor:pointer;background:var(--bg);font:inherit}
+  .btn.primary{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+  .section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px;display:flex;justify-content:space-between;align-items:center}
+  article.proj{border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:16px;position:relative}
+  article.proj .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:12px}
+  article.proj h3{margin:0;font-size:18px}
+  article.proj .meta{font-size:12px;color:var(--primary)}
+  article.proj p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.6}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:12px;padding:3px 10px;border-radius:6px;background:#f1f3f6;color:var(--muted)}
+  ul.contacts{list-style:none;padding:0;margin:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;max-width:560px}
+  ul.contacts li{position:relative}
+  ul.contacts li + li{border-top:1px solid var(--border)}
+  ul.contacts a{display:flex;align-items:center;gap:16px;padding:18px 20px}
+  ul.contacts a:hover{background:#f7f8fa}
+  ul.contacts .ico{width:32px;height:32px;border-radius:8px;background:var(--primary);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+  ul.contacts .lbl{font-size:14px;font-weight:500}
+  ul.contacts .val{font-size:13px;color:var(--muted)}
+  ul.contacts .arrow{margin-left:auto;color:var(--muted)}
+  footer{border-top:1px solid var(--border);padding:24px 0;color:var(--muted);font-size:12px;margin-top:64px}
+  .empty{color:var(--muted);font-size:14px;font-style:italic}
+
+  /* editor */
+  [contenteditable="true"]{outline:2px dashed #0b1f4d;outline-offset:4px;border-radius:4px;background:#f9fafb}
+  .item-actions{display:flex;gap:6px;margin-top:10px}
+  .item-actions button, .row-actions button{font-size:12px;padding:4px 10px;border-radius:6px;
+    border:1px solid var(--border);background:var(--bg);cursor:pointer;font:inherit}
+  .row-actions{display:flex;justify-content:flex-end;gap:6px;margin-bottom:10px}
+  .add-btn{margin-top:8px;font-size:13px;padding:8px 14px;border:1px dashed var(--border);
+    border-radius:8px;background:none;cursor:pointer;color:var(--muted);width:100%;font:inherit}
+  .add-btn:hover{color:var(--fg);border-color:var(--primary)}
+  .editable-field{display:block}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:50}
+  .modal.show{display:flex}
+  .modal .box{background:#fff;padding:28px;border-radius:12px;max-width:380px;width:90%}
+  .modal h3{margin:0 0 8px;font-size:18px}
+  .modal p{margin:0 0 16px;color:var(--muted);font-size:14px}
+  .modal input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;
+    font:inherit;font-size:14px;margin-bottom:12px}
+  .modal .actions{display:flex;gap:8px;justify-content:flex-end}
+  .badge{font-size:11px;background:#0b1f4d;color:#fff;padding:2px 8px;border-radius:4px;margin-left:6px}
+  .field-row{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:start;margin-bottom:8px;font-size:14px}
+  .field-row label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;padding-top:8px}
+  .field-row input, .field-row textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:14px}
+  .field-row textarea{min-height:80px;resize:vertical}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap nav">
-    <a href="#/" class="brand">Portfólio</a>
-    <nav class="tabs" id="tabs">
-      <a href="#/" data-route="/">Início</a>
-      <a href="#/academicos" data-route="/academicos">Acadêmico</a>
-      <a href="#/pessoais" data-route="/pessoais">Pessoal</a>
-      <a href="#/contato" data-route="/contato">Contato</a>
+
+<header class="site">
+  <div class="wrap row">
+    <a class="brand" data-tab="home">Portfólio</a>
+    <nav class="tabs">
+      <button data-tab="home" class="active">Início</button>
+      <button data-tab="academico">Acadêmico</button>
+      <button data-tab="pessoal">Pessoal</button>
+      <button data-tab="contato">Contato</button>
+      <button id="editorBtn" class="edit-btn">Editor</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <!-- Início -->
-  <section class="page" data-page="/">
-    <p class="eyebrow">Estudante · Ciência da Computação</p>
-    <h1>João da Silva Oliveira</h1>
-    <p class="lead">Sou estudante universitário no quinto semestre de Ciência da Computação,
-      com foco em desenvolvimento de software, sistemas distribuídos e inteligência artificial
-      aplicada. Construo projetos para aprender em profundidade — da especificação à entrega.</p>
-    <div class="grid2">
-      <div class="card"><h3>TRABALHO ATUAL</h3>
-        <p>Pesquisa de iniciação científica em otimização de algoritmos de grafos e desenvolvimento web full-stack com TypeScript e Python.</p></div>
-      <div class="card"><h3>AMBIÇÕES</h3>
-        <p>Cursar mestrado na área de sistemas inteligentes e contribuir com projetos open source que tenham impacto real em pesquisa acadêmica e na indústria.</p></div>
-    </div>
-    <div class="btns">
-      <a href="#/academicos" class="btn btn-primary">Ver projetos</a>
-      <a href="#/contato" class="btn btn-outline">Entrar em contato</a>
-    </div>
-  </section>
 
-  <!-- Acadêmicos -->
-  <section class="page" data-page="/academicos">
-    <p class="eyebrow">Universidade</p>
-    <h2 class="page-title">Projetos acadêmicos</h2>
-    <p class="lead">Trabalhos desenvolvidos em disciplinas e na pesquisa de iniciação científica.</p>
-    <div class="stack" id="acad"></div>
-  </section>
+  <section id="home" class="active"></section>
+  <section id="academico"></section>
+  <section id="pessoal"></section>
+  <section id="contato"></section>
 
-  <!-- Pessoais -->
-  <section class="page" data-page="/pessoais">
-    <p class="eyebrow">Fora da sala de aula</p>
-    <h2 class="page-title">Projetos pessoais & colaborações</h2>
-    <section class="block" style="margin-top:40px">
-      <p class="section-label">Projetos pessoais</p>
-      <div class="pgrid" id="pers"></div>
-    </section>
-    <section class="block">
-      <p class="section-label">Colaborações</p>
-      <div class="pgrid" id="colab"></div>
-    </section>
-  </section>
-
-  <!-- Contato -->
-  <section class="page" data-page="/contato">
-    <p class="eyebrow">Vamos conversar</p>
-    <h2 class="page-title">Contato</h2>
-    <p class="lead">Estou aberto a colaborações em projetos acadêmicos, oportunidades de estágio e discussões sobre pesquisa.</p>
-    <div class="contact">
-      <a href="https://github.com/joaosilva" target="_blank" rel="noopener">
-        <span class="ico">GH</span>
-        <span><div class="lbl">GitHub</div><div class="val">github.com/joaosilva</div></span>
-      </a>
-      <a href="https://linkedin.com/in/joaosilva" target="_blank" rel="noopener">
-        <span class="ico">in</span>
-        <span><div class="lbl">LinkedIn</div><div class="val">linkedin.com/in/joaosilva</div></span>
-      </a>
-      <a href="mailto:joao.silva@email.com">
-        <span class="ico">@</span>
-        <span><div class="lbl">Email</div><div class="val">joao.silva@email.com</div></span>
-      </a>
-    </div>
-  </section>
 </main>
 
-<footer><div class="wrap">© <span id="yr"></span> — Portfólio acadêmico</div></footer>
+<footer>
+  <div class="wrap">© <span id="y"></span> — Portfólio acadêmico</div>
+</footer>
+
+<div class="modal" id="loginModal">
+  <div class="box">
+    <h3>Modo editor</h3>
+    <p>Digite a senha para editar o portfólio. As alterações ficam salvas neste navegador.</p>
+    <input type="password" id="pwInput" placeholder="senha" />
+    <div class="actions">
+      <button class="btn" onclick="closeLogin()">Cancelar</button>
+      <button class="btn primary" onclick="tryLogin()">Entrar</button>
+    </div>
+    <p style="font-size:12px;margin-top:14px">Senha padrão: <code>admin</code> — altere no código (variável <code>EDIT_PASSWORD</code>).</p>
+  </div>
+</div>
 
 <script>
-const academicos = [
-  {title:"Compilador para linguagem didática",course:"Compiladores",when:"2025/1",
-   desc:"Implementação de analisador léxico, sintático e semântico para uma linguagem imperativa simples, com geração de código intermediário em três endereços.",
-   tech:["C++","Flex","Bison"]},
-  {title:"Simulador de escalonamento de processos",course:"Sistemas Operacionais",when:"2024/2",
-   desc:"Simulador comparando algoritmos FCFS, SJF, Round Robin e prioridade, com métricas de throughput, espera média e tempo de resposta.",
-   tech:["Python","Matplotlib"]},
-  {title:"API REST para biblioteca universitária",course:"Engenharia de Software",when:"2024/2",
-   desc:"Sistema completo de empréstimos com autenticação JWT, testes automatizados e documentação OpenAPI.",
-   tech:["Node.js","PostgreSQL","Docker"]},
-  {title:"Análise de algoritmos em grafos densos",course:"Iniciação Científica",when:"2025/1",
-   desc:"Estudo comparativo entre Dijkstra, Bellman-Ford e A* em grafos sintéticos com diferentes densidades, com publicação em evento interno.",
-   tech:["Python","NetworkX","LaTeX"]},
-];
-const pessoais = [
-  {title:"tinyql",role:"Autor",
-   desc:"Mini-banco de dados relacional escrito do zero em Rust, com parser SQL próprio e armazenamento em arquivo. Projeto de estudo sobre internals de SGBDs.",
-   tech:["Rust"]},
-  {title:"agenda-cli",role:"Autor",
-   desc:"Aplicativo de linha de comando para gerenciar tarefas e prazos da faculdade, com sincronização via arquivo JSON e atalhos vim-like.",
-   tech:["Go","Bubble Tea"]},
-];
-const colaboracoes = [
-  {title:"openviz",role:"Contribuidor",
-   desc:"Biblioteca open source de visualização de dados. Contribuí com correções no módulo de eixos logarítmicos e documentação de exemplos.",
-   tech:["TypeScript","D3"]},
-  {title:"Hackathon UFXX 2024",role:"Front-end",
-   desc:"Equipe de quatro pessoas; protótipo de sistema de carona universitária com geolocalização. Segundo lugar geral.",
-   tech:["React Native","Firebase"]},
-];
+const EDIT_PASSWORD = "admin"; // <- altere aqui
+const STORAGE_KEY = "portfolio_data_v1";
 
-const tags = a => a.map(t=>`<span class="tag">${t}</span>`).join("");
-document.getElementById("acad").innerHTML = academicos.map(p=>`
-  <article class="proj">
-    <div class="proj-head"><h3>${p.title}</h3><span class="when">${p.when}</span></div>
-    <p class="course">${p.course}</p>
-    <p class="desc">${p.desc}</p>
-    <div class="tags">${tags(p.tech)}</div>
-  </article>`).join("");
-const pcard = p=>`<article class="proj pcard">
-  <div class="row"><h3>${p.title}</h3><span class="role">${p.role}</span></div>
-  <p class="desc">${p.desc}</p><div class="tags">${tags(p.tech)}</div></article>`;
-document.getElementById("pers").innerHTML = pessoais.map(pcard).join("");
-document.getElementById("colab").innerHTML = colaboracoes.map(pcard).join("");
-document.getElementById("yr").textContent = new Date().getFullYear();
+const DEFAULTS = {
+  home: {
+    kicker: "Estudante · Ciência da Computação",
+    name: "João da Silva Oliveira",
+    bio: "Estudante apaixonado por desenvolvimento de software, com foco em construir sistemas claros, acessíveis e bem projetados.",
+    current: "Pesquisando arquitetura de aplicações web modernas e contribuindo em projetos open source durante a graduação.",
+    ambitions: "Atuar como engenheiro de software em equipes que valorizam qualidade técnica, mentoria e impacto real para os usuários."
+  },
+  academic: [],
+  personal: [],
+  collabs: [],
+  contacts: [
+    { label:"GitHub", value:"github.com/seu-usuario", href:"https://github.com/" },
+    { label:"LinkedIn", value:"linkedin.com/in/seu-perfil", href:"https://linkedin.com/" },
+    { label:"Email", value:"seu@email.com", href:"mailto:seu@email.com" }
+  ]
+};
 
-function route(){
-  const h = location.hash.replace(/^#/,"") || "/";
-  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.dataset.page===h));
-  document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("active",a.dataset.route===h));
-  window.scrollTo(0,0);
+let state = load();
+let editMode = sessionStorage.getItem("portfolio_edit") === "1";
+
+function load(){
+  try{ const s = localStorage.getItem(STORAGE_KEY);
+    if(s) return {...DEFAULTS, ...JSON.parse(s)};
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULTS));
 }
-window.addEventListener("hashchange",route);
-route();
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function esc(s){ return (s??"").toString().replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+function iconFor(label){
+  const k=(label||"").toLowerCase();
+  if(k.includes("git")) return "GH";
+  if(k.includes("linked")) return "in";
+  if(k.includes("mail")||k.includes("email")) return "@";
+  return "↗";
+}
+
+/* ---------- rendering ---------- */
+function render(){
+  renderHome();
+  renderList("academico", "academic", "Projetos acadêmicos", "Faculdade",
+    "Trabalhos desenvolvidos durante as disciplinas da graduação.",
+    [{k:"title",l:"Título"},{k:"course",l:"Disciplina"},{k:"semester",l:"Semestre"},{k:"description",l:"Descrição",ta:true}],
+    {title:"",course:"",semester:"",description:"",tech:[]});
+  renderPessoal();
+  renderContato();
+  document.getElementById("editorBtn").textContent = editMode ? "Sair do editor" : "Editor";
+}
+
+function renderHome(){
+  const c = state.home;
+  const el = document.getElementById("home");
+  if(editMode){
+    el.innerHTML = `
+      <p class="kicker"><span contenteditable="true" data-bind="home.kicker">${esc(c.kicker)}</span></p>
+      <h1><span contenteditable="true" data-bind="home.name">${esc(c.name)}</span></h1>
+      <p class="lead"><span contenteditable="true" data-bind="home.bio">${esc(c.bio)}</span></p>
+      <div class="grid2">
+        <div class="card"><h3>Trabalho atual</h3><p contenteditable="true" data-bind="home.current">${esc(c.current)}</p></div>
+        <div class="card"><h3>Ambições</h3><p contenteditable="true" data-bind="home.ambitions">${esc(c.ambitions)}</p></div>
+      </div>`;
+  } else {
+    el.innerHTML = `
+      <p class="kicker">${esc(c.kicker)}</p>
+      <h1>${esc(c.name)}</h1>
+      <p class="lead">${esc(c.bio)}</p>
+      <div class="grid2">
+        <div class="card"><h3>Trabalho atual</h3><p>${esc(c.current)}</p></div>
+        <div class="card"><h3>Ambições</h3><p>${esc(c.ambitions)}</p></div>
+      </div>
+      <div class="btns">
+        <button class="btn primary" data-tab="academico">Ver projetos</button>
+        <button class="btn" data-tab="contato">Entrar em contato</button>
+      </div>`;
+  }
+  bindEditables(el);
+  bindTabs(el);
+}
+
+function projectCard(p, fields){
+  const meta = p.course ? `${esc(p.course)}${p.semester?" · "+esc(p.semester):""}` : (p.role?esc(p.role):"");
+  return `<article class="proj">
+    <div class="head"><h3>${esc(p.title)}</h3><span class="meta">${meta}</span></div>
+    <p>${esc(p.description)}</p>
+    <div class="tags">${(p.tech||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+  </article>`;
+}
+
+function projectEditor(p, idx, key, fields){
+  return `<article class="proj">
+    ${fields.map(f=>`<div class="field-row"><label>${f.l}</label>${
+      f.ta ? `<textarea data-listfield="${key}|${idx}|${f.k}">${esc(p[f.k]||"")}</textarea>`
+           : `<input data-listfield="${key}|${idx}|${f.k}" value="${esc(p[f.k]||"")}" />`
+    }</div>`).join("")}
+    <div class="field-row"><label>Tecnologias</label><input data-listfield="${key}|${idx}|tech" value="${esc((p.tech||[]).join(", "))}" placeholder="separadas por vírgula" /></div>
+    <div class="item-actions"><button onclick="removeItem('${key}',${idx})">Remover</button></div>
+  </article>`;
+}
+
+function renderList(sectionId, key, title, kicker, lead, fields, template){
+  const el = document.getElementById(sectionId);
+  const items = state[key] || [];
+  const list = items.length
+    ? items.map((p,i)=> editMode ? projectEditor(p,i,key,fields) : projectCard(p,fields)).join("")
+    : (editMode ? "" : `<p class="empty">Nenhum projeto adicionado ainda.</p>`);
+  el.innerHTML = `
+    <p class="kicker">${esc(kicker)}</p>
+    <h2 class="page">${esc(title)}</h2>
+    <p class="lead">${esc(lead)}</p>
+    ${list}
+    ${editMode ? `<button class="add-btn" onclick='addItem("${key}", ${JSON.stringify(template)})'>+ Adicionar</button>`:""}
+  `;
+  bindListFields(el);
+  bindTabs(el);
+}
+
+function renderPessoal(){
+  const el = document.getElementById("pessoal");
+  const fields = [{k:"title",l:"Título"},{k:"role",l:"Papel"},{k:"description",l:"Descrição",ta:true}];
+  const renderGroup = (key, label, template) => {
+    const items = state[key] || [];
+    const inner = items.length
+      ? items.map((p,i)=> editMode ? projectEditor(p,i,key,fields) : projectCard(p,fields)).join("")
+      : (editMode ? "" : `<p class="empty">Nenhum item adicionado ainda.</p>`);
+    return `<div class="section-label">${label}</div>${inner}${
+      editMode ? `<button class="add-btn" onclick='addItem("${key}", ${JSON.stringify(template)})'>+ Adicionar</button>`:""}`;
+  };
+  el.innerHTML = `
+    <p class="kicker">Fora da sala de aula</p>
+    <h2 class="page">Projetos pessoais & colaborações</h2>
+    ${renderGroup("personal","Projetos pessoais",{title:"",role:"Autor",description:"",tech:[]})}
+    ${renderGroup("collabs","Colaborações",{title:"",role:"Contribuidor",description:"",tech:[]})}
+  `;
+  bindListFields(el);
+}
+
+function renderContato(){
+  const el = document.getElementById("contato");
+  const items = state.contacts || [];
+  const list = editMode
+    ? items.map((c,i)=>`<article class="proj">
+        <div class="field-row"><label>Rótulo</label><input data-listfield="contacts|${i}|label" value="${esc(c.label)}"/></div>
+        <div class="field-row"><label>Texto</label><input data-listfield="contacts|${i}|value" value="${esc(c.value)}"/></div>
+        <div class="field-row"><label>URL</label><input data-listfield="contacts|${i}|href" value="${esc(c.href)}"/></div>
+        <div class="item-actions"><button onclick="removeItem('contacts',${i})">Remover</button></div>
+      </article>`).join("")
+    : `<ul class="contacts">${items.map(c=>`
+        <li><a href="${esc(c.href)}" target="_blank" rel="noreferrer">
+          <span class="ico">${esc(iconFor(c.label))}</span>
+          <span><div class="lbl">${esc(c.label)}</div><div class="val">${esc(c.value)}</div></span>
+          <span class="arrow">↗</span>
+        </a></li>`).join("")}</ul>`;
+  el.innerHTML = `
+    <p class="kicker">Conversar</p>
+    <h2 class="page">Contato</h2>
+    <p class="lead">Disponível para conversas sobre projetos acadêmicos, oportunidades e colaborações.</p>
+    ${list}
+    ${editMode ? `<button class="add-btn" onclick='addItem("contacts",{"label":"","value":"","href":""})'>+ Adicionar</button>`:""}
+  `;
+  bindListFields(el);
+}
+
+/* ---------- editing helpers ---------- */
+function bindEditables(root){
+  root.querySelectorAll("[data-bind]").forEach(n=>{
+    n.addEventListener("blur", ()=>{
+      const path = n.dataset.bind.split(".");
+      let o = state; for(let i=0;i<path.length-1;i++) o = o[path[i]];
+      o[path[path.length-1]] = n.innerText.trim();
+      save();
+    });
+  });
+}
+function bindListFields(root){
+  root.querySelectorAll("[data-listfield]").forEach(n=>{
+    n.addEventListener("input", ()=>{
+      const [key,idx,field] = n.dataset.listfield.split("|");
+      const item = state[key][+idx];
+      if(field === "tech") item.tech = n.value.split(",").map(s=>s.trim()).filter(Boolean);
+      else item[field] = n.value;
+      save();
+    });
+  });
+}
+function addItem(key, template){
+  state[key] = state[key] || [];
+  state[key].push(JSON.parse(JSON.stringify(template)));
+  save(); render();
+}
+function removeItem(key, idx){
+  state[key].splice(idx,1); save(); render();
+}
+
+/* ---------- tabs ---------- */
+function bindTabs(root){
+  root.querySelectorAll("[data-tab]").forEach(t=>{
+    t.addEventListener("click", e=>{
+      e.preventDefault();
+      activateTab(t.dataset.tab);
+    });
+  });
+}
+function activateTab(id){
+  document.querySelectorAll("main > section").forEach(s=>s.classList.toggle("active", s.id===id));
+  document.querySelectorAll("nav.tabs button[data-tab]").forEach(b=>b.classList.toggle("active", b.dataset.tab===id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll("nav.tabs button[data-tab], .brand").forEach(b=>{
+  b.addEventListener("click", e=>{ e.preventDefault(); activateTab(b.dataset.tab); });
+});
+
+/* ---------- login ---------- */
+document.getElementById("editorBtn").onclick = ()=>{
+  if(editMode){ editMode=false; sessionStorage.removeItem("portfolio_edit"); render(); }
+  else { document.getElementById("loginModal").classList.add("show"); document.getElementById("pwInput").focus(); }
+};
+function closeLogin(){ document.getElementById("loginModal").classList.remove("show"); document.getElementById("pwInput").value=""; }
+function tryLogin(){
+  if(document.getElementById("pwInput").value === EDIT_PASSWORD){
+    editMode = true; sessionStorage.setItem("portfolio_edit","1");
+    closeLogin(); render();
+  } else { alert("Senha incorreta"); }
+}
+document.getElementById("pwInput").addEventListener("keydown", e=>{ if(e.key==="Enter") tryLogin(); });
+
+document.getElementById("y").textContent = new Date().getFullYear();
+render();
 </script>
 </body>
 </html>
