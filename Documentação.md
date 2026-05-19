@@ -2,6 +2,13 @@
 
 Projeto de um portfólio online para estudantes de tecnologia e de outras áreas poderem anexar suas informações, projetos acadêmicos e projetos pessoais, contato para projetos e trabalhos.
 
+## Colaboradores:
+Nicolas Alves Correa
+
+Pedro Paulo da Silva Abreu
+
+Felipe Sales da Mota
+
 ## Protótipo
 Aplicação: [Link da aplicação](https://nicolascorrea15.github.io/Projeto_LowCode_VibeCode_NoCode/portfolio.html)
 
